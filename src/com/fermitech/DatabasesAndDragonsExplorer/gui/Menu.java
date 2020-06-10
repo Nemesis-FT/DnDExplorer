@@ -31,6 +31,7 @@ public class Menu extends AutoPanel implements ActionListener, ChangeListener {
     private AutoDesktop desktop;
     private JInternalFrame frame;
     private JTextArea about;
+    private String test;
     /**
      * This is the MainPanel constructor.
      * It initializes the ui.
