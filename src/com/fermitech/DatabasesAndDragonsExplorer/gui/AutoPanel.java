@@ -46,13 +46,25 @@ public class AutoPanel extends JPanel {
      * @param message the message that gets displayed.
      */
     public void summonErrorPopup(String message) {
-        JOptionPane.showMessageDialog(null, message, "Javanhal: Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, message, "Errore", JOptionPane.ERROR_MESSAGE);
     }
-
+    /**
+     * This is the AutoPanel summonInputPopup method.
+     * It sets the summons an input dialog.
+     *
+     * @param message the message that gets displayed.
+     * @return response the user's response to the question.
+     */
     public String summonInputPopup(String message) {
         return JOptionPane.showInputDialog(null, message);
     }
-
+    /**
+     * This is the AutoPanel summonInfoPopup method.
+     * It sets the summons an information dialog.
+     *
+     * @param infoMessage the message that gets displayed.
+     * @param titleBar the title of the window.
+     */
     public void summonInfoPopup(String infoMessage, String titleBar) {
         JOptionPane.showMessageDialog(null, infoMessage, titleBar, JOptionPane.INFORMATION_MESSAGE);
     }

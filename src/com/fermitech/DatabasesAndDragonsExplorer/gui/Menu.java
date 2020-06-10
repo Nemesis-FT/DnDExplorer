@@ -12,7 +12,9 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+/**
+ * This is the Menu class, which implements the main menu ui elements and functionalities.
+ */
 public class Menu extends AutoPanel implements ActionListener, ChangeListener {
 
     private QueryButton pb1, pb2, pb3, pb4, pb5, pb6;
@@ -21,7 +23,7 @@ public class Menu extends AutoPanel implements ActionListener, ChangeListener {
     private QueryButton mb1, mb2, mb3;
     private QueryButton qb1;
     private JTextField address, dbName, username, password, freeQuery;
-    private JLabel instructions, queryInstructions;
+    private JLabel instructions;
     private JButton connect;
     private AutoPanel pannelloS, pannelloP, pannelloU, pannelloC, pannelloM, pannelloQ, pannelloA;
     private JTabbedPane tab;
@@ -29,7 +31,13 @@ public class Menu extends AutoPanel implements ActionListener, ChangeListener {
     private AutoDesktop desktop;
     private JInternalFrame frame;
     private JTextArea about;
-
+    /**
+     * This is the MainPanel constructor.
+     * It initializes the ui.
+     *
+     * @param frame the frame that hosts the panel.
+     * @param desktop the desktop in which the window exists.
+     */
     public Menu(JInternalFrame frame, AutoDesktop desktop) {
         super("Menu Principale");
         this.frame = frame;
@@ -73,8 +81,8 @@ public class Menu extends AutoPanel implements ActionListener, ChangeListener {
         container1.add(tab);
     }
 
-    public void aboutSetup() {
-        about = new JTextArea("Databases&Dragons Explorer è parte della relazione del Gruppo 3,"+"composto da Lorenzo Balugani (Matr 128991) e Matteo Balugani (Matr ...)."+"\nIstruzioni per l'uso: dopo aver eseguito l'accesso al database, si possono eseguire"+" le query presenti nella relazione, oppure accedere alla tab 'Query' per inserirne di nuove."+" Se la query ha esito positivo, e il set dei risultati non è nullo, viene creata una finestra contenente una tabella."+" Per ottenere il valore di un campo, fare doppio click su di esso.");
+    private void aboutSetup() {
+        about = new JTextArea("Databases&Dragons Explorer è parte della relazione del Gruppo 3,"+"composto da Lorenzo Balugani (Matr 128991) e Matteo Balugani (Matr 135475)."+"\nIstruzioni per l'uso: dopo aver eseguito l'accesso al database, si possono eseguire"+" le query presenti nella relazione, oppure accedere alla tab 'Query' per inserirne di nuove."+" Se la query ha esito positivo, e il set dei risultati non è nullo, viene creata una finestra contenente una tabella."+" Per ottenere il valore di un campo, fare doppio click su di esso.");
         about.setEditable(false);
         about.setColumns(27);
         about.setRows(10);
@@ -84,7 +92,7 @@ public class Menu extends AutoPanel implements ActionListener, ChangeListener {
         pannelloA.add(about);
     }
 
-    public void querySetup() {
+    private void querySetup() {
         freeQuery = new JTextField(30);
         freeQuery.setVisible(true);
         pannelloQ.add(freeQuery);
@@ -94,7 +102,7 @@ public class Menu extends AutoPanel implements ActionListener, ChangeListener {
         qb1.setVisible(true);
     }
 
-    public void personaggiSetup() {
+    private void personaggiSetup() {
         pb1 = new QueryButton("Tutti i personaggi di un giocatore", "SELECT p.* FROM personaggio AS p, utente AS u WHERE u.utenteemail = '?' AND u.utenteemail = p.utenteemail;", new String[]{"Mail dell'utente?"});
         pannelloP.add(pb1);
         pb1.addActionListener(this);
@@ -122,7 +130,7 @@ public class Menu extends AutoPanel implements ActionListener, ChangeListener {
         pannelloP.setVisible(true);
     }
 
-    public void utentiSetup() {
+    private void utentiSetup() {
         ub1 = new QueryButton("Gruppi di un utente in una campagna", "SELECT * FROM Gruppo WHERE Gruppo.gruppoid IN (SELECT ScriveNel.gruppoid FROM ScriveNel WHERE ScriveNel.utenteemail='?') AND Gruppo.campagnaid=?;", new String[]{"Email dell'utente?", "Id della campagna?"});
         pannelloU.add(ub1);
         ub1.addActionListener(this);
@@ -133,7 +141,7 @@ public class Menu extends AutoPanel implements ActionListener, ChangeListener {
         ub2.setVisible(true);
     }
 
-    public void campagnaSetup() {
+    private void campagnaSetup() {
         cb1 = new QueryButton("Tutti i partecipanti di una campagna", "SELECT Utente.* FROM Campagna JOIN Partecipa ON Campagna.campagnaid = Partecipa.campagnaid JOIN Utente ON Partecipa.utenteemail = Utente.utenteemail WHERE Campagna.campagnaid=?;", new String[]{"Id della campagna?"});
         pannelloC.add(cb1);
         cb1.addActionListener(this);
@@ -156,7 +164,7 @@ public class Menu extends AutoPanel implements ActionListener, ChangeListener {
         cb5.setVisible(true);
     }
 
-    public void messaggioSetup() {
+    private void messaggioSetup() {
         mb1 = new QueryButton("Membri di un gruppo", "SELECT Utente.* FROM Gruppo JOIN ScriveNel ON Gruppo.gruppoid = ScriveNel.gruppoid JOIN Utente ON ScriveNel.utenteEmail = Utente.utenteEmail WHERE Gruppo.gruppoid=?;", new String[]{"Id del gruppo?"});
         pannelloM.add(mb1);
         mb1.addActionListener(this);
@@ -171,7 +179,7 @@ public class Menu extends AutoPanel implements ActionListener, ChangeListener {
         mb3.setVisible(true);
     }
 
-    public void impostazioniSetup() {
+    private void impostazioniSetup() {
         instructions = new JLabel("Inserire di seguito l'indirizzo (localhost:1234), il nome del db e le credenziali.");
         pannelloS.add(instructions);
         instructions.setVisible(true);
@@ -193,6 +201,12 @@ public class Menu extends AutoPanel implements ActionListener, ChangeListener {
         connect.addActionListener(this);
     }
 
+    /**
+     * This is the Menu actionPerformed method.
+     * It reacts to changes to the ui, and runs specific features.
+     *
+     * @param e the event.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == connect) {

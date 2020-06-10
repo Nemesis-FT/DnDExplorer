@@ -8,11 +8,20 @@ import java.awt.event.MouseEvent;
 import java.beans.PropertyVetoException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
-
+/**
+ * This is the QueryWindow class, which implements the main ui elements for the window containing the query's result.
+ */
 public class QueryWindow extends AutoPanel{
     private JInternalFrame frame;
     private AutoPanel table;
     private JTable tabella;
+    /**
+     * This is the MainPanel constructor.
+     * It initializes the ui and builds the table.
+     *
+     * @param frame the frame that hosts the panel.
+     * @param tab the result of the query
+     */
     public QueryWindow(JInternalFrame frame, ArrayList<ArrayList> tab) {
         super("Risultato della query");
         this.frame = frame;
@@ -24,7 +33,12 @@ public class QueryWindow extends AutoPanel{
         } catch (PropertyVetoException e) {
         }
     }
-
+    /**
+     * This is the tableSetup method.
+     * It builds the table.
+     *
+     * @param tab the result of the query
+     */
     private void tableSetup(ArrayList<ArrayList> tab){
         DefaultTableModel model = new DefaultTableModel();
         for(Object s: tab.get(0)){
